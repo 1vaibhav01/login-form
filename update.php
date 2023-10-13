@@ -34,6 +34,7 @@ if (
     $newframework = $_POST['newframework'];
 
     $updateSql = "UPDATE Employee SET 
+        `username` = ?,
         `fname` = ?,
         `lname` = ?,
         `mobile` = ?,
@@ -48,7 +49,9 @@ if (
     if (!$updateStmt) {
         echo "Update statement not prepared: " . $conn->error;
     } else {
-        $updateStmt->bind_param("sssssssi", $newfname, $newlname, $newmobile, $newemail, $newgender, $newstate, $newcity, $id);
+        $username = $newfname[0] . "." . $newlname;
+        $username = strtolower($username);
+        $updateStmt->bind_param("ssssssssi", $username, $newfname, $newlname, $newmobile, $newemail, $newgender, $newstate, $newcity, $id);
 
         if ($updateStmt->execute()) {
 
