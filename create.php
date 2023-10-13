@@ -63,10 +63,13 @@ if (isset($_POST['Submit'])) {
         $username = strtolower($username);
         // echo $username;
 
-        $sql = "INSERT INTO Employee (`username`,`fname`,`lname`,`mobile`,`email`,`gender`,`state`,`city`)
+        $str = "123456";
+        $password = password_hash($str, PASSWORD_BCRYPT, ['cost' => 12]);
+
+        $sql = "INSERT INTO Employee (`username`,`password`,`fname`,`lname`,`mobile`,`email`,`gender`,`state`,`city`)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssss", $username, $FName, $LName, $Mobile, $Email, $Gender, $State, $City);
+        $stmt->bind_param("sssssssss", $username, $password, $FName, $LName, $Mobile, $Email, $Gender, $State, $City);
 
         if ($stmt->execute()) {
             echo "User added successfully\n";
