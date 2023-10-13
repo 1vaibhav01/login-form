@@ -1,7 +1,8 @@
 <?php
 var_dump($_POST);
 require_once "db.php";
-// session_start();
+
+session_start();
 
 if (isset($_POST['login-button'])) {
     $usernameEmail = $_POST['usernameEmail'];
@@ -22,6 +23,7 @@ if (isset($_POST['login-button'])) {
             if ($row) {
                 if ($pwd == "123456") {
                     echo "Login successful!";
+                    $_SESSION['emp_id'] = $row['id'];
                     header("location: welcome.php");
                     exit();
                 } else {

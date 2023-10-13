@@ -29,7 +29,7 @@ echo '</script>';
                 <?php echo $id ?>
                 <form id="update-form" action="update.php?id=<?php echo $id ?>" method="post">
                     <div class="row">
-                        <div class="col-sm">
+                        <div class="col-sm"> 
                             <label for="newfname">FName</label>
                         </div>
                         <div class="col-sm">
