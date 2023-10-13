@@ -21,13 +21,15 @@ if (isset($_POST['login-button'])) {
             $row = $result->fetch_assoc();
 
             if ($row) {
-                if ($pwd == "123456") {
+                // echo $row['password'] . "\n";
+                if (password_verify($pwd, $row['password'])) {
                     echo "Login successful!";
                     $_SESSION['emp_id'] = $row['id'];
                     header("location: welcome.php");
                     exit();
                 } else {
-                    echo "Invalid password";
+                    echo 'Invalid password.';
+                    header("location: login.php");
                 }
             } else {
                 echo "User not found";
